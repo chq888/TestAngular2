@@ -32,7 +32,7 @@ gulp.task("scriptsNStyles", () => {
 });
 
 gulp.task('copyJS', function () {
-  gulp.src('./systemjsConfig.js')
+  gulp.src('script/systemjsConfig.js')
       .pipe(gulp.dest('./wwwroot/script'));
 });
 
@@ -51,11 +51,11 @@ gulp.task('ts', function () {
 gulp.task('watch', ['watch.ts', 'watchJS']);
 
 gulp.task('watch.ts', ['ts'], function () {
-  return gulp.watch('script/*.ts', ['ts']);
+  return gulp.watch(['script/*.ts', 'script/**/*.ts'], ['ts']);
 });
 
 gulp.task('watchJS', ['copyJS'], function () {
-  return gulp.watch('/systemjsConfig.js', ['copyJS']);
+  return gulp.watch('script/systemjsConfig.js', ['copyJS']);
 });
 
 gulp.task('default', ['scriptsNStyles', 'watch']);
