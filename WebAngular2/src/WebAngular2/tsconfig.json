@@ -1,0 +1,21 @@
+﻿{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "system",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    //"outDir": "../wwwroot/appScripts/", // where transpiled file will be placed.
+    "removeComments": false,
+    "sourceMap": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es6",
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
+}
