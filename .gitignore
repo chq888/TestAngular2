@@ -1,0 +1,9 @@
+bower_components/
+WebCoreFrame1/src/WebCoreFrame1/node_modules/
+js/
+build/
+fonts/
+build/
+css/
+.vscode/
+*.orig
