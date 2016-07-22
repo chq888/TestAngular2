@@ -1,11 +1,12 @@
 ﻿{
+  "compileOnSave": true,
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "system",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    //"outDir": "../wwwroot/appScripts/", // where transpiled file will be placed.
+    "outDir": "../wwwroot/script/", // where transpiled file will be placed.
     "removeComments": false,
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -13,6 +14,7 @@
     "moduleResolution": "node"
   },
   "exclude": [
+    "bower_components",
     "node_modules",
     "wwwroot",
     "typings/main",

@@ -6,6 +6,7 @@ var _ = require('lodash'),
     cssmin = require('gulp-cssmin'),
     rename = require('gulp-rename');
 var ts = require('gulp-typescript');;
+var sourcemaps = require('gulp-sourcemaps');
 var clean = require('gulp-clean');
 var paths = {
   npm: './node_modules/',
@@ -124,12 +125,29 @@ gulp.task('ts', function () {
           "./wwwroot/script/*.ts",
           "./wwwroot/script/**/*.ts"
   ])
+      .pipe(sourcemaps.init()) // This means sourcemaps will be generated
       .pipe(ts(tsProject), undefined, ts.reporter.fullReporter());
-  return tsResult.js.pipe(gulp.dest('./wwwroot/script'));
+  return tsResult.js
+    .pipe(sourcemaps.write()) // Now the sourcemaps are added to the .js file
+    .pipe(gulp.dest('./wwwroot/script'));
 });
 
+//    .pipe(sourcemaps.write({
+//      // Return relative source map root directories per file.
+//      sourceRoot: function (file) {
+//        var sourceFile = path.join(file.cwd, file.sourceMap.file);
+//        return path.relative(path.dirname(sourceFile), file.cwd);
+//      }
+//    }))
+
+//.pipe(sourcemaps.write('.', {
+//  sourceRoot: function(file) { return file.cwd + '/src'; }
+//}))
+//});
+
+
 gulp.task('copyJS', function () {
-  gulp.src('./wwwroot/script/systemjsConfig.js')
+  gulp.src('./wwwroot/systemjsConfig.js')
       .pipe(gulp.dest('./wwwroot/script'));
 });
 
@@ -138,7 +156,7 @@ gulp.task('watch.ts', ['ts'], function () {
 });
 
 gulp.task('watchJS', ['copyJS'], function () {
-  return gulp.watch('./wwwroot/script/systemjsConfig.js', ['copyJS']);
+  return gulp.watch('./wwwroot/systemjsConfig.js', ['copyJS']);
 });
 
 

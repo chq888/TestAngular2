@@ -66,6 +66,13 @@ namespace WebAngular2
         routes.MapRoute(
             name: "default",
             template: "{controller=Home}/{action=Index}/{id?}");
+
+        //routes.MapRoute("spa-fallback",
+        //        "{*anything}",
+        //        new { controller = "Home", action = "Index" });
+        //routes.MapWebApiRoute("defaultApi",
+        //                      "api/{controller}/{id?}");
+
       });
     }
   }

@@ -1,6 +1,7 @@
-﻿import { MainComponent } from "./MainComponent";
+﻿import { TestComponent } from "./home/TestComponent";
 import { PonyRacerAppComponent } from "./pony/PonyRacerAppComponent";
 import { bootstrap }    from "@angular/platform-browser-dynamic";
-import { HTTP_PROVIDERS } from "@angular/http";
+//import { ROUTER_PROVIDERS } from "@angular/router";
+import { HTTP_PROVIDERS, HTTP_BINDINGS } from "@angular/http";
 
-bootstrap(PonyRacerAppComponent, [HTTP_PROVIDERS]);
+bootstrap(TestComponent, [HTTP_BINDINGS, HTTP_PROVIDERS]);
