@@ -2,17 +2,9 @@
 WebAngular2/src/WebAngular2/node_modules/
 WebAngular2/src/WebAngular2/bower_components/
 WebAngular2/src/WebAngular2/wwwroot/lib
-WebAngular2/src/WebAngular2/wwwroot/script
 WebAngular2/src/WebAngular2/bin
 WebAngular2/src/WebAngular2/obj
-WebAngular2/src/WebAngular2/script/*.js
 WebAngular2/src/WebAngular2/script/*.js.map
-WebAngular2/src/WebAngular2/script/**/*.js
 WebAngular2/src/WebAngular2/script/**/*.js.map
-js/
-build/
-fonts/
-build/
-css/
 .vscode/
 *.orig

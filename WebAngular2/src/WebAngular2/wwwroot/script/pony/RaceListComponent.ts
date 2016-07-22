@@ -2,7 +2,8 @@
 
 @Component({
   selector: "ns-races",
-  template: "Races"
+  templateUrl: 'script/pony/RaceList.html'
 })
 export class RaceListComponent {
+  myRace: any = { name: "test" };
 }
