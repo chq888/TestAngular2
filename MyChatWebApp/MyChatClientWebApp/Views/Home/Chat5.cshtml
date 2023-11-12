@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Chat5";
+}
+
+<h1>Chat5</h1>
+
+<script>
+
+    // Dynamically load the chat widget script
+    const chatWidgetScript = document.createElement('script');
+
+    chatWidgetScript.src = 'https://localhost:7011/js/chat5.js?v=' + (new Date().getTime());
+    chatWidgetScript.async = true;
+
+    chatWidgetScript.referrerpolicy = "no-referrer-when-downgrade";
+    chatWidgetScript.onload = function () {
+        // The chat widget script has loaded; you can now use it
+    };
+    //chatWidgetScript.onload = function () {
+    //    Elm.Main.init();
+    //}
+
+    document.body.appendChild(chatWidgetScript);
+
+</script>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ChatEntity.cs" />
+    <Compile Remove="ChatGroup.cs" />
+    <Compile Remove="ChatMessage.cs" />
+    <Compile Remove="ChatRoomModels.cs" />
+    <Compile Remove="Client.cs" />
+    <Compile Remove="Group.cs" />
+    <Compile Remove="MessageDto.cs" />
+  </ItemGroup>
+
+</Project>

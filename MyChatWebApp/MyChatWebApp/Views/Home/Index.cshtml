@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+<div class="container">
+    <div class="header">
+        🗨️ WebChat
+    </div>
+
+    <div class="message-section" id="messageSection">
+        <!-- this div display on right side -->
+        <!-- <div class="msg-box received">
+            hi 
+            </div> -->
+    </div>
+
+    <div class="input-section">
+        <input type="text" class="input" id="txtMessage" />
+        <button class="btn" id="btnSend">Send</button>
+    </div>
+</div>  
+@section Scripts {
+    <script src="~/chat.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Chat1";
+}
+
+<h1>Chat1</h1>
+
+@*<div id="chat-widget-container"></div>
+*@@*
+<script>
+    // Dynamically load the chat widget
+
+    (function () {
+
+        const chatWidgetContainer = document.createElement('div');
+        chatWidgetContainer.id = 'chat-widget-container';
+        //const chatWidgetContainer = document.getElementById('chat-widget-container');
+
+        const chatWidgetScript = document.createElement('script');
+        chatWidgetScript.src = 'https://localhost:7011/Home/Chat1';
+
+        // Ensure that the script is executed in the global scope
+        chatWidgetScript.type = 'module';
+        chatWidgetScript.referrerpolicy = "no-referrer-when-downgrade";
+
+        // Append the chat widget script to the host website
+        chatWidgetContainer.appendChild(chatWidgetScript);
+        document.body.appendChild(chatWidgetContainer);
+
+    })();
+
+</script>*@
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://localhost:7011/Home/Chat1';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->

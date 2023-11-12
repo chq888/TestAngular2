@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions {
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<input type="hidden" id="__RequestVerificationToken"
+       name="__RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+
+
+<h6>This is the Home Index.cshtml view</h6>
+
+@* <script type="text/javascript" src="/dist/polyfills.bundle.js">
+    </script>
+    <script type="text/javascript" src="/dist/vendor.bundle.js">
+        </script>
+        <script type="text/javascript" src="/dist/app.bundle.js"></script> 
+ *@
+@section Scripts {
+    @*  <script src="~/ng-client/runtime.js"></script>
+    <script src="~/ng-client/polyfills.js"></script>
+    <script src="~/ng-client/vendor.js"></script>
+    <script src="~/ng-client/main.js"></script> *@
+
+    <script src="https://localhost:44560/runtime.js" type="module" asp-append-version="true"></script>
+    <script src="https://localhost:44560/polyfills.js" type="module" asp-append-version="true"></script>
+    <script src="https://localhost:44560/styles.js" defer asp-append-version="true"></script>
+    <script src="https://localhost:44560/vendor.js" type="module" asp-append-version="true"></script>
+    <script src="https://localhost:44560/main.js" type="module" asp-append-version="true"></script>
+
+}
+@section Head {
+    <link rel="stylesheet" href="https://localhost:44496/styles.css" asp-append-version="true">
+
+        @*     <link href="~/ng-client/styles.css" rel="stylesheet" />
+ *@
+}
+
+<div>
+    <myapp-root>Loading...</myapp-root>
+</div>

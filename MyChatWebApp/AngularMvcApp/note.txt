@@ -1,0 +1,11 @@
+﻿ng build --prod --deployUrl="WebAngular/"
+
+ng build --base-href /WebAngular/ 
+ng build --prod --base-href=/WebAngular/ 
+
+"start": "ng serve --base-href=/WebAngular/"  // obsolete
+
+ng build --prod --base-href /WebAngular/ --deploy-url /WebAngular 
+ng build --prod --base-href /WebAngular/ --deploy-url /WebAngular/
+            "deployUrl": "/WebAngular/",
+                        "baseHref": "/WebAngular/",

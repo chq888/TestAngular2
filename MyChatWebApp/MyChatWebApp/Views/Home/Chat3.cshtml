@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Chat1";    Layout = null;
+
+}
+
+<h1>Chat3 Host</h1>
+<template id="chat-widget-template">
+  <div id="chat-widget">
+    <div id="chat-messages"></div>
+    <input type="text" id="message-input" placeholder="Type a message...">
+    <button id="send-button">Send</button>
+  </div>
+</template>
+
+<script>
+class ChatWidget extends HTMLElement {
+  constructor() {
+    super();
+    const template = document.getElementById('chat-widget-template');
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.appendChild(template.content.cloneNode(true));
+    
+    // Add your chat widget's JavaScript logic here
+    // This code should handle sending and receiving messages in your chat application
+  }
+}
+
+customElements.define('chat-widget', ChatWidget);
+</script>

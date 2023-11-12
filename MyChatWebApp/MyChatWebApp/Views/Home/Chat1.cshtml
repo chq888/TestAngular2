@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Chat1";
+    Layout = null;
+}
+
+<h1>Chat1 Host</h1>
+<div id="chat-widget">
+    <div id="chat-messages"></div>
+    <input type="text" id="message-input" placeholder="Type a message...">
+    <button id="send-button">Send</button>
+</div>
+
+<script>
+
+    const chatMessages = document.getElementById('chat-messages');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+
+    sendButton.addEventListener('click', sendMessage);
+
+    function sendMessage() {
+        const message = messageInput.value;
+        if (message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            messageInput.value = '';
+        }
+    }
+</script>
+
