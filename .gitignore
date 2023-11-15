@@ -33,7 +33,6 @@ Keys/
 
 # Visual Studio 2015 cache/options directory
 .vs/
-.vscode/
 /QuickApp/wwwroot/dist/
 
 # MSTest test Results
@@ -264,7 +263,15 @@ paket-files/
 __pycache__/
 *.pyc
 # Others
-QuickApp.sln.licenseheader
+*.sln.licenseheader
 Thumbs.db
-.vscode/
 *.orig
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+.angular

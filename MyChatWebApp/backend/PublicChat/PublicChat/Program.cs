@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,13 +27,28 @@ namespace PublicChatServer
             builder.Services
                 .AddInfrastructure(builder.Configuration, builder.Environment);
 
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //var options = new ForwardedHeadersOptions
+                //{
+                //    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                //};
+
+                //options.KnownNetworks.Clear();
+                //options.KnownProxies.Clear();
+
+                //builder.UseForwardedHeaders(options);
             }
             else
             {
+                app.UseStatusCodePagesWithRedirects("~/Error?statusCode={0}");
+
                 app.UseExceptionHandler("/Home/Error");
 
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -49,8 +65,16 @@ namespace PublicChatServer
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            app.UseHttpsRedirection();
-;
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.UseCors(builder => builder
                .SetIsOriginAllowed(_ => true)
@@ -58,9 +82,9 @@ namespace PublicChatServer
                .AllowAnyHeader()
                .AllowCredentials());
 
+            app.UseHttpsRedirection();
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+
             //Registered after static files, to set headers for dynamic content.
             //app.UseXfo(xfo => xfo.Deny());
             //app.UseRedirectValidation(t => t.AllowSameHostRedirectsToHttps(44348));
@@ -148,7 +172,12 @@ namespace PublicChatServer
 
             //    return next();
             //});
+            //app.UseEndpoints(endpoints =>
+            //{
 
+            //    endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
+            //    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            //});
             app.MapControllerRoute(
             name: "default",
             pattern: "{controller}/{action=Index}/{id?}");

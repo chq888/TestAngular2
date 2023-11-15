@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class MessageDto {\n  constructor() {\n    this.user = '';\n    this.msgText = '';\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

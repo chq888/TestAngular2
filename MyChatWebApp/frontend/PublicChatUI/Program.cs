@@ -45,6 +45,7 @@ namespace PublicChatUI
 
             app.UseHttpsRedirection();
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -99,7 +100,11 @@ namespace PublicChatUI
             //   .AllowAnyMethod()
             //   .AllowAnyHeader()
             //   .AllowCredentials());
+
+            app.MapControllers();
+
             app.MapFallbackToController("Index", "Home");
+            app.MapFallbackToFile("/index.html");
 
             app.MapFallbackToFile("index.html");
 
