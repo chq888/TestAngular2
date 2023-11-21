@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,9 @@ namespace PublicChatServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddScoped<ChatCore>();
+            builder.Services.AddScoped<ChatHubV2>();
+            builder.Services.AddScoped<IMessagingService, MessagingService>();
             // Add services to the container.
             builder.Services
                 .AddInfrastructure(builder.Configuration, builder.Environment);
@@ -182,7 +185,24 @@ namespace PublicChatServer
             name: "default",
             pattern: "{controller}/{action=Index}/{id?}");
             app.MapRazorPages();
-            app.MapHub<ChatHub>("/chatsocket");
+            //app.UseCors("CorsPolicy");
+
+            app.MapHub<ChatHub>("/chatsocket", options =>
+            {
+                options.CloseOnAuthenticationExpiration = false;
+                options.TransportMaxBufferSize = 32;
+                options.ApplicationMaxBufferSize = 32;
+                //options.Transports = HttpTransportType.WebSockets;
+            });
+            app.MapHub<ChatHubV2>("/HubV2", options =>
+            {
+                options.CloseOnAuthenticationExpiration = false;
+                options.TransportMaxBufferSize = 32;
+                options.ApplicationMaxBufferSize = 32;
+                options.Transports = HttpTransportType.WebSockets;
+            });
+
+            app.MapHub<MessageSpreader>("/messageSpreader");
 
             //app.UseEndpoints(endpoints =>
             //{

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;      // using this
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;      // using this
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace PublicChatServer.Hubs
@@ -25,4 +27,25 @@ namespace PublicChatServer.Hubs
             return Clients.All.SendAsync("ReceiveOne", user, message);    // Note this 'ReceiveOne' 
         }
     }
+    [Authorize]
+    public class ChatHubV2 : Hub
+    {
+
+    }
+    public class MessageSpreader : Hub
+    {
+//        var ajaxSendMessageFunction = function() {
+//    document.getElementById("userTextMessage").value = "";
+//};
+
+//    var connection = new signalR.HubConnectionBuilder().withUrl("/messageSpreader").build();
+
+//    connection.on("ReceiveMessage", function(stringMessage)
+//    {
+//        document.getElementById("messages").value += stringMessage;
+//    })
+
+//connection.start();
+    }
+
 }

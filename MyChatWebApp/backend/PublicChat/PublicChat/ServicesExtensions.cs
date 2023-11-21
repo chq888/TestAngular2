@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using MessagePack;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,7 +73,12 @@ namespace PublicChatServer
 
         private static IServiceCollection AddCustomUi(this IServiceCollection services, IWebHostEnvironment environment)
         {
-            var controllerWithViews = services.AddControllersWithViews();
+            var controllerWithViews = services.AddControllersWithViews()
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = true;
+                })
+;
             var razorPages = services.AddRazorPages()
             .AddViewLocalization()
             .AddDataAnnotationsLocalization();
@@ -144,6 +150,13 @@ namespace PublicChatServer
             //               .WithHeaders("accept", "content-type", "origin", "X-InlineCount")
             //               .WithExposedHeaders("X-InlineCount")));
 
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //                          .AllowAnyMethod()
+            //                          .AllowAnyHeader());
+            //});
 
             return services;
         }
@@ -151,7 +164,8 @@ namespace PublicChatServer
         private static IServiceCollection AddCustomSignalR(this IServiceCollection services)
         {
             services.AddSignalR()
-                .AddMessagePackProtocol();
+                .AddMessagePackProtocol(options => options.SerializerOptions = MessagePackSerializerOptions.Standard.WithSecurity(MessagePackSecurity.UntrustedData))
+                .AddJsonProtocol();
 
             return services;
         }
