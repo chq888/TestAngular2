@@ -11,21 +11,21 @@ import { environment } from './../../environments/environment';
 export class ChatService {
 
 
-   private  connection: any = new signalR.HubConnectionBuilder().withUrl(environment.hubConnectionURL)   // mapping to the chathub as in startup.cs
-                                         .configureLogging(signalR.LogLevel.Information)
-                                         .build();
-   readonly POST_URL = environment.broadcastURL;
+  private connection: any = new signalR.HubConnectionBuilder().withUrl(environment.hubConnectionURL)   // mapping to the chathub as in startup.cs
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
+  readonly POST_URL = environment.broadcastURL;
 
 
   private receivedMessageObject: MessageDto = new MessageDto();
   private sharedObj = new Subject<MessageDto>();
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.connection.onclose(async () => {
       await this.start();
     });
-   this.connection.on("ReceiveOne", (user, message) => { this.mapReceivedMessage(user, message); });
-   this.start();                 
+    this.connection.on("ReceiveOne", (user, message) => { this.mapReceivedMessage(user, message); });
+    this.start();
   }
 
 
@@ -37,14 +37,14 @@ export class ChatService {
     } catch (err) {
       console.log(err);
       setTimeout(() => this.start(), 5000);
-    } 
+    }
   }
 
   private mapReceivedMessage(user: string, message: string): void {
     this.receivedMessageObject.user = user;
     this.receivedMessageObject.msgText = message;
     this.sharedObj.next(this.receivedMessageObject);
- }
+  }
 
   /* ****************************** Public Mehods **************************************** */
 

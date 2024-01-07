@@ -19,8 +19,6 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 //const providers = [
 //  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
 //];
-
-
 ////if (environment.production) {
 ////  enableProdMode();
 ////}
@@ -51,35 +49,44 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 //  });
 
 
-//fetch('/assets/appconfig.json')
-//  .then((response) => response.json())
-//  .then((config) => {
-//    if (environment.production) {
-//      enableProdMode()
+
+//if (environment.production) {
+//  enableProdMode();
+//}
+//platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {
+//  // Ensure Angular destroys itself on hot reloads.
+//  try {
+//    if (window['ngRef']) {
+//      window['ngRef'].destroy();
 //    }
+//    window['ngRef'] = ref;
+//  }
+//  catch (err2) {
+//  }
 
-//    platformBrowserDynamic([{ provide: APP_CONFIG, useValue: config }])
-//      .bootstrapModule(AppModule)
-//      .catch((err) => console.error(err))
-//  });
+//  // Otherwise, log the boot error
+//}).catch(err => console.error(err));
 
 
-
-
-if (environment.production) {
-  enableProdMode();
-}
-
-platformBrowserDynamic().bootstrapModule(AppModule).then(ref => {
-  // Ensure Angular destroys itself on hot reloads.
-  try {
-    if (window['ngRef']) {
-      window['ngRef'].destroy();
+fetch('https://localhost:44560/assets/appconfig.json')
+  .then((resp) => resp.json())
+  .then((config) => {
+    if (environment.production) {
+      enableProdMode();
     }
-    window['ngRef'] = ref;
-  }
-  catch (err2) {
-  }
 
-  // Otherwise, log the boot error
-}).catch(err => console.error(err));
+    platformBrowserDynamic([{ provide: APP_CONFIG, useValue: config }])
+      .bootstrapModule(AppModule).then(ref => {
+        // Ensure Angular destroys itself on hot reloads.
+        try {
+          if (window['ngRef']) {
+            window['ngRef'].destroy();
+          }
+          window['ngRef'] = ref;
+        }
+        catch (err2) {
+        }
+
+        // Otherwise, log the boot error
+      }).catch(err => console.error(err));
+  });

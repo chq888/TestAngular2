@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 import { MessageDto } from 'src/app/Dto/MessageDto';
 import { HttpClient } from '@angular/common/http';
+import { APP_CONFIG, AppConfig } from './app.config';
+import { AppConfigService } from './services/appconfig.service';
 
 @Component({
   selector: 'myapp-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
+  //template: ` {{ config | json }} `
 })
 export class AppComponent implements OnInit {
 
   configLoaded = true;
 
-  constructor(private http: HttpClient, private chatService: ChatService) { }
+  constructor(private http: HttpClient, private chatService: ChatService, private configService: AppConfigService) { }
 
   ngOnInit(): void {
 

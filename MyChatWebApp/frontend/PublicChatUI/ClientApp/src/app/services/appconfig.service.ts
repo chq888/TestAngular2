@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { APP_CONFIG, AppConfig } from '../app.config';
 
-@Injectable()
+//@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AppConfigService {
+
   private appConfig;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) public config: AppConfig) { }
 
   loadConfig() {
     
