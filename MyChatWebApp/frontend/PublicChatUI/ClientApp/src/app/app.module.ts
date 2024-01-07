@@ -1,11 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AppConfigService } from './services/appconfig.service';
+
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => appConfig.loadConfig();
+};
+
+//const appInitializerFn = () => {
+//  return () => {
+//    console.log('entering app initializer')
+//    return new Promise((resolve, reject) => {
+//      setTimeout(() => {
+//        console.log('resolving app initializer');
+//        resolve();
+//      }, 5000);
+//    });
+//  };
+//};
+
 
 @NgModule({
   declarations: [
@@ -20,7 +38,15 @@ import { FooterComponent } from './components/footer/footer.component';
       { path: '', component: AppComponent, pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers:
+    [AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

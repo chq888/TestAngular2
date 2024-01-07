@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "run-script-os",
     "build": "ng build --output-hashing=none",
+    "build:staging": "ng build --configuration staging --output-hashing=none ",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prestart": "node aspnetcore-https",

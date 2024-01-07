@@ -7,7 +7,7 @@
 
 <div class="body-footer">
 
-  <div class="ud-body">
+  <div class="ud-body" *ngIf="configLoaded">
     <div class="msg-box">
       <ul>
         <li *ngFor="let mObj of msgInboxArray" [ngClass]="mObj.user === msgDto.user ? 'in-msg' : 'ex-msg'">{{mObj.user}} :<br /><span class="msg-italic-style">{{mObj.msgText}}</span></li>

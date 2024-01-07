@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  baseURL: 'https://localhost:44560',
   hubConnectionURL: 'https://localhost:44379/chatsocket',
   broadcastURL: 'https://localhost:44379/api/chat/send'
 };

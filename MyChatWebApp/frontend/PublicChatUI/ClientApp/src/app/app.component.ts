@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
-import {MessageDto } from 'src/app/Dto/MessageDto';
+import { MessageDto } from 'src/app/Dto/MessageDto';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'myapp-root',
@@ -9,19 +10,26 @@ import {MessageDto } from 'src/app/Dto/MessageDto';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private chatService: ChatService) {}
+  configLoaded = true;
+
+  constructor(private http: HttpClient, private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.chatService.retrieveMappedObject().subscribe( (receivedObj: MessageDto) => { this.addToInbox(receivedObj);});  // calls the service method to get the new messages sent
-                                                     
+
+    //this.http.get('./assets/appConfig.json')
+    //  .subscribe(config => {
+    //    this.configLoaded = true;
+    //  });
+
+    this.chatService.retrieveMappedObject().subscribe((receivedObj: MessageDto) => { this.addToInbox(receivedObj); });  // calls the service method to get the new messages sent
   }
 
   msgDto: MessageDto = new MessageDto();
   msgInboxArray: MessageDto[] = [];
 
   send(): void {
-    if(this.msgDto) {
-      if(this.msgDto.user.length == 0 || this.msgDto.user.length == 0){
+    if (this.msgDto) {
+      if (this.msgDto.user.length == 0 || this.msgDto.user.length == 0) {
         window.alert("Both fields are required.");
         return;
       } else {

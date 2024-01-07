@@ -61,7 +61,7 @@ public class ChatCore
 
 public interface IMessagingService
 {
-    Task SendMessage(string senderUsername);
+    //Task SendMessage(string senderUsername);
 }
 
 
@@ -75,6 +75,11 @@ public class MessagingService : IMessagingService
     {
         _hubContext = hubContext;
     }
+
+    //public Task SendMessage(string senderUsername)
+    //{
+    //    await _hubContext.Clients.Clients(connections).SendAsync(methodName, objectToSend);
+    //}
 
     protected async Task Send<TMessage>(IEnumerable<string> connections, string methodName, TMessage objectToSend)
     {
