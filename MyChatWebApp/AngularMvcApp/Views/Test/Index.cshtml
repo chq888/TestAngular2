@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Test Page";
+}
+
+<input type="text" id="txtName" />
+<input type="button" id="btnGet" value="Get Current Time" />
+XMLHttpRequest.withCredentials = true
+enable credentials by setting the Access-Control-Allow-Credentials response header to true
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            $("#btnGet").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Test/AjaxMethod",
+                    data: '{name: "' + $("#txtName").val() + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    // crossDomain: true,
+                    // xhrFields: {
+                    //     withCredentials: true
+                    // },
+                    success: function (response) {
+                        alert(response);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}
+

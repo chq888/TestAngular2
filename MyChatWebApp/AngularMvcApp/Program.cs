@@ -1,6 +1,18 @@
+using Microsoft.AspNetCore.Authentication.Negotiate;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+   .AddNegotiate();
+
+builder.Services.AddAuthorization(options =>
+{
+    // By default, all incoming requests will be authorized according to the default policy.
+    options.FallbackPolicy = options.DefaultPolicy;
+});
+
+builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews();
 //builder.Services.AddCors(options =>
@@ -30,6 +42,7 @@ app.UseHttpsRedirection();
 app.UseCors(options =>
 {
     options//.WithOrigins("http://localhost:5500")
+    .SetIsOriginAllowed((host) => true)
         .AllowAnyHeader()
         .AllowAnyOrigin()
         .AllowAnyHeader();
@@ -40,10 +53,14 @@ app.UseCors(options =>
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.MapFallbackToFile("index.html");
 

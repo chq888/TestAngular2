@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicChatServer", "backend
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicChatUI", "frontend\PublicChatUI\PublicChatUI.csproj", "{5F443DDF-1B9D-4045-A88C-3AFBCB4B97AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicChatWebHost", "PublicChatWebHost\PublicChatWebHost.csproj", "{2CC56444-3DB4-4A0B-BA4A-6C5472602F25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicChatWebHost", "PublicChatWebHost\PublicChatWebHost.csproj", "{2CC56444-3DB4-4A0B-BA4A-6C5472602F25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
