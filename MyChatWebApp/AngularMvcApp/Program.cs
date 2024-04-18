@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMemoryCache();
 
 // Add services to the container.
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
@@ -15,6 +16,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews();
+
 //builder.Services.AddCors(options =>
 //{
 //    options.AddDefaultPolicy(
@@ -50,18 +52,21 @@ app.UseCors(options =>
     //.AllowCredentials();
 });
 
+app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapControllers();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapRazorPages();
-
+//app.MapFallbackToController("Index", "Home");
+app.MapFallbackToPage("/Index");
 app.MapFallbackToFile("index.html");
 
 app.Run();
